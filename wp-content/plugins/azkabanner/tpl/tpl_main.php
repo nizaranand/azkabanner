@@ -24,7 +24,7 @@ include AZKBN_INCLUDE_URL.'xml_regex.php';//that is, if you need it
 // points to the site that the feed came from.
 //$temp_f = value_in('temp_f', $xml);
 
-	$channel = "f0f73fef-4f97-6b03-b87f-fbb7920583ed"; //Fill in the channel you are using (key)
+	$channel = "edf03cd8-7b40-1f74-055d-edcf1f5d3fbd"; //Fill in the channel you are using (key)
 	$intvalue = "66"; //Fill in the intvalue you are using (integer)
 	//$strvalue = "The weather condition at ".$location." is currently ".$weather." with a temperature of ".$temp_f." degrees farenheit."."@".$weather."@".$temp_f; //Fill in the strvalue you are using (string)
 	$strvalue = "something not about dogs";

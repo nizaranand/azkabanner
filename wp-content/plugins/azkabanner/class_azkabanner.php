@@ -69,14 +69,15 @@ if( !class_exists('Azkabanner') ) {
 
 
 add_action('wp_ajax_dementor', 'dementor_callback');
-add_action('wp_ajax_nopriv_my-action', 'dementor_callback');
+add_action('wp_ajax_nopriv_dementor', 'dementor_callback');
 function dementor_callback() {
 	// get the submitted parameters
-	$postID = $_POST['postID'];
- 	$channel = "f0f73fef-4f97-6b03-b87f-fbb7920583ed"; //Fill in the channel you are using (key)
+	$key = $_POST['postID'];
+ 	//$channel = "f0f73fef-4f97-6b03-b87f-fbb7920583ed"; //Fill in the channel you are using (key) this one is home 
+	$channel = "edf03cd8-7b40-1f74-055d-edcf1f5d3fbd";
 	$intvalue = "66"; //Fill in the intvalue you are using (integer)
-	//$strvalue = "The weather condition at ".$location." is currently ".$weather." with a temperature of ".$temp_f." degrees farenheit."."@".$weather."@".$temp_f; //Fill in the strvalue you are using (string)
-	$strvalue = "something not about dogs";
+	
+	$strvalue = "eject=>".trim($key);
 	$xmldata = "<?xml version=\"1.0\"?><methodCall><methodName>llRemoteData</methodName>
 <params><param><value><struct>
 <member><name>Channel</name><value><string>".$channel."</string></value></member>
@@ -88,7 +89,7 @@ function dementor_callback() {
 
 	$xml_obj = simplexml_load_string(trim($xml[1]));
 	$returned_message = $xml_obj->params->param->value->struct->member[1]->value->string;
-	
+
 	// generate the response
 	$response = json_encode( array( 'reply' => $returned_message ) );
 
