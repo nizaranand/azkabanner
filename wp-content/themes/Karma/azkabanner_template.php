@@ -9,7 +9,9 @@ Template Name: Azkabanner main
 </div><!-- end header-holder -->
 </div><!-- end header -->
 
-<?php truethemes_before_main_hook();// action hook, see truethemes_framework/global/hooks.php ?>
+<?php truethemes_before_main_hook();// action hook, see truethemes_framework/global/hooks.php 
+$current_user = wp_get_current_user();//user object 
+?>
 
 <div id="main">
 <?php get_template_part('theme-template-part-tools','childtheme'); ?>
@@ -31,7 +33,15 @@ get_template_part('theme-template-part-subnav-horizontal','childtheme');}else{
 <div id="content" class="portfolio_full_width">
 <?php if(have_posts()) : while(have_posts()) : the_post(); the_content(); truethemes_link_pages(); endwhile; endif; ?>
 
-<?php include(AZKBN_TPL_DIR . '/tpl_main.php'); ?>
+<?php 
+
+if ( 0 == $current_user->ID ) {
+	echo "Not logged in";
+}
+else{
+	include(AZKBN_TPL_DIR . '/tpl_main.php'); 
+}
+?>
 
 <div class="port_sep"><div class="hr_top_link"></div></div><!-- end port_sep -->
 
