@@ -26,10 +26,10 @@ require_once AZKBN_DIR . 'class_azkabanner.php';
 /**
  * instantiate the set up class
  */
-$wp_user_survey = new Azkabanner();
+$wp_azkabanner = new Azkabanner();
 
 
 /**
  * activate the plugin
  */
-//register_activation_hook( __FILE__, array(&$wp_user_survey, 'plugin_activate') );
+register_activation_hook( __FILE__, array(&$wp_azkabanner, 'plugin_activate') );

@@ -62,6 +62,23 @@ if( !class_exists('Azkabanner') ) {
             return (isset($_POST[$param])?$_POST[$param]:(isset($_GET[$param])?$_GET[$param]:$default));
         }
 
+        // initial activation functions
+		function plugin_activate() {
+			global $wpdb;
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+			
+			// create the surveys table
+			$table_name = $wpdb->prefix . 'azkbn_donuts';
+			
+			if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+				$sql = "CREATE TABLE " . $table_name . " (
+				  `donut_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+				  `donut_uuid` VARCHAR(200) NOT NULL ,				
+				  `user_uuid` VARCHAR(200) NOT NULL ,				    
+				  PRIMARY KEY (`donut_id`) );";				
+				dbDelta($sql);
+			}
+		}
 
 	}
 
