@@ -13,7 +13,7 @@ define('AZKBN_URL', plugin_dir_url(__FILE__));
 define('AZKBN_DIR', plugin_dir_path(__FILE__));
 define('AZKBN_CSS_URL', AZKBN_URL . 'css');
 define ('AZKBN_JS_URL', AZKBN_URL . 'js');
-define ('AZKBN_INCLUDE_URL', AZKBN_DIR. '/include');
+define ('AZKBN_INCLUDE_URL', AZKBN_DIR. 'include');
 define('AZKBN_TPL_DIR',AZKBN_DIR . 'tpl' );
 
 

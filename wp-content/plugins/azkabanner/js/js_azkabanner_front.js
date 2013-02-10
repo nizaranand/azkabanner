@@ -12,4 +12,5 @@ jQuery(document).ready(function($){
 			}
 		);
 	});
+	$('#sims').accordion( { heightStyle: "content" });
 });
