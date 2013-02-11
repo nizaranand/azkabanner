@@ -88,3 +88,28 @@ if( !class_exists('Azkabanner') ) {
 	}
 
 }
+
+require_once(AZKBN_INCLUDE_URL."/azkbn_functions.php");
+add_action('wp_ajax_dementor', 'dementor_callback');
+add_action('wp_ajax_nopriv_dementor', 'dementor_callback');
+
+function dementor_callback() {
+    // get the submitted parameters
+    $args = $_POST['postID'];   
+    $action = "eject";
+    $key = "";
+    $vars = "?action=".trim($action)."&uuid=".trim($key);    
+
+    $url = "http://sim6326.agni.lindenlab.com:12046/cap/73a6abda-5e29-f6e4-aa13-aa4cbece4039";
+    $returned_message = disapparate($url."/".$vars);
+    // generate the response
+    $response = json_encode( array( 'reply' => $returned_message ) );
+
+ 
+    // response output
+    header( "Content-Type: application/json" );
+    echo $response;
+ 
+    // IMPORTANT: don't forget to "exit"
+    exit;
+}
