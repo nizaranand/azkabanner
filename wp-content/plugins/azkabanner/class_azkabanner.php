@@ -96,11 +96,32 @@ add_action('wp_ajax_nopriv_dementor', 'dementor_callback');
 function dementor_callback() {
     // get the submitted parameters
     $args = $_POST['postID'];   
-    $action = "eject";
-    $key = "";
-    $vars = "?action=".trim($action)."&uuid=".trim($key);    
+    $args = explode(":", $args);
+    if(count($args) != 3 ){
+    	die("nope!");
+    	exit;
+    }
+    $action = trim($args[0]);
+    $key = trim($args[1]);
+    $donut_uuid = trim($args[2]);
 
-    $url = "http://sim6326.agni.lindenlab.com:12046/cap/73a6abda-5e29-f6e4-aa13-aa4cbece4039";
+    //get donut url
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'azkbn_donuts';
+    $query = "
+    SELECT donut_url 
+    FROM ".$table_name."
+    WHERE 
+    user_uuid = '".$key."'    
+    AND donut_uuid = '".$donut_uuid."'
+    AND 1=1
+    LIMIT 1";
+
+    $donuts = $wpdb->get_col($query, 0);    
+
+    $vars = "?action=".$action."&uuid=".$key;    
+
+    $url = $donuts[0];
     $returned_message = disapparate($url."/".$vars);
     // generate the response
     $response = json_encode( array( 'reply' => $returned_message ) );
